@@ -17,10 +17,17 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-sanitize.min.js"></script>
     <script type="application/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
 
-    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+    <script src="bower_components/videogular/videogular.js"></script>
+    <script src="bower_components/videogular-controls/vg-controls.js"></script>
+    <script src="bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
+    <script src="bower_components/videogular-poster/vg-poster.js"></script>
+    <script src="bower_components/videogular-buffering/vg-buffering.js"></script>
+
+    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0"/>
 
 </head>
 <body style="margin-top: 38pt">
@@ -61,7 +68,12 @@
 </div>
 
 <script>
-    var app = angular.module('myApp', ['ui.router'])
+    var app = angular.module('myApp', ['ui.router',
+                "ngSanitize",
+                "com.2fdevs.videogular",
+                "com.2fdevs.videogular.plugins.controls",
+                "com.2fdevs.videogular.plugins.overlayplay",
+                "com.2fdevs.videogular.plugins.poster"])
             .config(function config($urlRouterProvider, $stateProvider) {
                 $urlRouterProvider.otherwise("/");
 
@@ -103,10 +115,16 @@
                 $scope.firstName = "John";
                 $scope.lastName = "Doe";
             })
-            .controller('RecentCtrl', function ($scope) {
-                $scope.firstName = "John";
-                $scope.lastName = "Doe";
-            })
+            .controller('RecentCtrl', ["$sce", "$scope", function ($sce, $scope) {
+                $scope.config = {
+                    sources: [
+                        {src: $sce.trustAsResourceUrl("podcasts/liberaalgeluid01.mp3"), type: "audio/mp3"}
+                    ],
+                    plugins: {
+                        poster: "http://www.videogular.com/assets/images/videogular.png"
+                    }
+                };
+            }])
             .controller('ArchiveCtrl', function ($scope) {
                 $scope.firstName = "John";
                 $scope.lastName = "Doe";
