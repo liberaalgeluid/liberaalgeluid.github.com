@@ -1,7 +1,5 @@
-<html ng-app>
+<html ng-app="myApp">
 <head>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -9,43 +7,62 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
           integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+          integrity="sha256-3dkvEK0WLHRJ7/Csr0BZjAWxERc5WH7bdeUya2aXxdU= sha512-+L4yy6FRcDGbXJ9mPG8MT/3UCDzwR9gPeyFNMCtInsol++5m3bk2bXWKdZjvybmohrAsn3Ua5x8gfLnbE1YkOg=="
+          crossorigin="anonymous">
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 </head>
 <body style="margin-top: 38pt">
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <!--Sitename-->
-        <a href="index.html" class="navbar-brand">Liberaal geluid</a>
+<div ng-controller="myCtrl">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <!--Sitename-->
+            <a href="index.html" class="navbar-brand">Liberaal geluid</a>
 
-        <!--Drop down menu on mobile-->
-        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
+            <!--Drop down menu on mobile-->
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-        <div class="collapse navbar-collapse navHeaderCollapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="index.html">Laatste aflevering</a></li>
-                <li><a href="archive.html">Archief</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+            <div class="collapse navbar-collapse navHeaderCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="index.html">Laatste aflevering</a></li>
+                    <li><a href="archive.html">Archief</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
         </div>
-
     </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <img class="featureImg" src="graphics/banner.jpg" width="100%">
+        </div>
+    </div>
+
+    <p>{{ firstName }}</p>
+    <p>{{ 3 + 5 }}</p>
 </div>
 
-<div class="row">
-    <div class="col-xs-12">
-        <img class="featureImg" src="graphics/banner.jpg" width="100%">
-    </div>
-</div>
+<script>
+    var app = angular.module('myApp', []).controller('myCtrl', function($scope) {
+        console.log("Break!");
+        $scope.firstName = "John";
+        $scope.lastName = "Doe";
+    });
+    console.log("Break!!");
+</script>
 
 </body>
 </html>
