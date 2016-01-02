@@ -17,6 +17,8 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="application/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
 
 </head>
 <body style="margin-top: 38pt">
@@ -36,9 +38,10 @@
 
             <div class="collapse navbar-collapse navHeaderCollapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="index.html">Laatste aflevering</a></li>
-                    <li><a href="archive.html">Archief</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a ui-sref="recent">Recent</a></li>
+                    <li><a ui-sref="archive">Archief</a></li>
+                    <li><a ui-sref="contact">Contact</a></li>
+                    <li><a ui-sref="about">Over ons</a></li>
                 </ul>
             </div>
 
@@ -51,17 +54,69 @@
         </div>
     </div>
 
-    <p>{{ firstName }}</p>
-    <p>{{ 3 + 5 }}</p>
+    <div class="container" ui-view="main"></div>
+
 </div>
 
 <script>
-    var app = angular.module('myApp', []).controller('myCtrl', function($scope) {
-        console.log("Break!");
-        $scope.firstName = "John";
-        $scope.lastName = "Doe";
-    });
-    console.log("Break!!");
+    var app = angular.module('myApp', ['ui.router'])
+            .config(function config($urlRouterProvider, $stateProvider) {
+                $urlRouterProvider.otherwise("/");
+
+                $stateProvider.state('recent', {
+                    url: '/',
+                    views: {
+                        "main": {
+                            controller: 'RecentCtrl',
+                            templateUrl: 'recent.tpl.html'
+                        }
+                    }
+                }).state('archive', {
+                    url: '/archive',
+                    views: {
+                        "main": {
+                            controller: 'ArchiveCtrl',
+                            templateUrl: 'archive.tpl.html'
+                        }
+                    }
+                }).state('contact', {
+                    url: '/contact',
+                    views: {
+                        "main": {
+                            controller: 'ContactCtrl',
+                            templateUrl: 'contact.tpl.html'
+                        }
+                    }
+                }).state('about', {
+                    url: '/about',
+                    views: {
+                        "main": {
+                            controller: 'AboutCtrl',
+                            templateUrl: 'about.tpl.html'
+                        }
+                    }
+                });
+            })
+            .controller('myCtrl', function ($scope) {
+                $scope.firstName = "John";
+                $scope.lastName = "Doe";
+            })
+            .controller('RecentCtrl', function ($scope) {
+                $scope.firstName = "John";
+                $scope.lastName = "Doe";
+            })
+            .controller('ArchiveCtrl', function ($scope) {
+                $scope.firstName = "John";
+                $scope.lastName = "Doe";
+            })
+            .controller('ContactCtrl', function ($scope) {
+                $scope.firstName = "John";
+                $scope.lastName = "Doe";
+            })
+            .controller('AboutCtrl', function ($scope) {
+                $scope.firstName = "John";
+                $scope.lastName = "Doe";
+            });
 </script>
 
 </body>
